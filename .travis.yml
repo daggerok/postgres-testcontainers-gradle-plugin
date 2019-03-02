@@ -1,0 +1,45 @@
+git:
+  depth: false
+  quiet: true
+language: java
+jdk: openjdk8
+sudo: required
+services:
+- docker
+addons:
+  apt:
+    packages:
+    - sudo
+    - lsof
+    - curl
+    - bash
+    - docker-ce
+install: true
+before_install:
+- source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+- stop_any 80
+script:
+- "./gradlew pgInfo"
+- "./gradlew pgStart"
+- "./gradlew pgStop"
+cache:
+  npm: true
+  packages: true
+  directories:
+  - "./node_modules"
+  - "~/.gradle"
+notifications:
+  email: false
+before_deploy:
+- "./gradlew npm_run_build"
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local_dir: "./.vuepress/dist"
+  github-token: "$GITHUB_TOKEN"
+  keep-history: true
+  on:
+    branch: master
+env:
+  global:
+    secure: DCJN7Ncqav4TgJ5EmI14FPu6y6iqYqjPPdmdhovj9oTC05fxxQzyCvP7zsW1+e/DpUYmbkw6lKD/l65XYQQ2T9zKQXOf4XF99deOGuCNfC8c4vBelwvuGmn+K0rdpdq+isxG5suVV+5SC8+nwli0aVd4LfHHWy1wv/YhYZUJkeiDyjx8rbI5YBFogbSLW/cI4SxbK7QvOrqFW35mlkPdA/PWeEA/RRfKi0yj4HE2R3oVseJOMTE66oGDvehn5KfmVDzwzpvt3kj9NPBFshCu7fQAai0WRpbSwVgPpgi1e6lexHI6MVd2F8UiNVou8WsYlUJBwE2y7tk7tI/qUMp5Eoox+WhonYMMVqkoZu8niqNJaIav9mYWMLcKDJTsr/A3GBPaPLFmqos7mvF2/7AHLW8vktzOpNAqMBQ43CzPAeENGHdh+Ul5wZJjn+KKqeD95TVk3fHCyQk8RFF43Nw1z00pqisXzlKHpV47w6U96Ng3tvIluu1abHT6mJZzUSmiHJhaYl1oyaNVQO1psch7gJlqlkBOp4w7w5lTyqMff1uUMe5QWC+YTXAavrR8FCMN3pFwgD09CTH3rgvXQcoC6eMc/3FHAbSWFjzhImZkm2i44qmF0EE8Y+5+fvzeCcKW6j/6R7ccZtugZKCt8xsE+tTjmyFoghQe6sSpupXOyNg=
