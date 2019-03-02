@@ -51,6 +51,7 @@ a49df6f25e1a
 ## resources
 
 - [TestContainers: making Java integration tests easy](https://zeroturnaround.com/rebellabs/java-integration-testing-with-testcontainers/)
+- [TestContainers home page](https://www.testcontainers.org/)
 - [Writing Custom Plugins](https://docs.gradle.org/current/userguide/custom_plugins.html)
 - [Gradle Kotlin DSL samples](https://github.com/gradle/kotlin-dsl/tree/master/samples)
 - [Gradle Kotlin DSL Primer](https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin-dsl_plugin)
